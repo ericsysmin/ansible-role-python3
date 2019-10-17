@@ -1,0 +1,8 @@
+---
+# defaults file for ericsysmin.python3
+
+python3_package_name: python3
+python3_executable_name: "{{ python3_package_name }}"
+python3_default_system: false
+python3_default_profile: false
+python3_default_user: true
