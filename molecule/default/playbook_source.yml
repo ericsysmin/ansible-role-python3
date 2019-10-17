@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: ericsysmin.python3
+      python3_install_from: source
+      python3_version: 3.6.9

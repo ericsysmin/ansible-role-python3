@@ -1,0 +1,34 @@
+---
+- name: Python 3 | Install Python3 Package
+  become: yes
+  package:
+    name: "{{ python3_package_name }}"
+  vars:
+    ansible_python_interpreter: /usr/bin/python2
+
+- name: Python 3 | Set system default python to point to python3
+  become: yes
+  file:
+    src: /usr/bin/{{ python3_executable_name }}
+    dest: /usr/bin/python
+    owner: root
+    group: root
+    state: link
+  when: python3_default_system
+
+- name: Python 3 | Set default user profile python to point to python3
+  become: yes
+  copy:
+    content: "alias python={{ python3_executable_name }}"
+    dest: /etc/profile.d/python3.sh
+    owner: root
+    group: root
+  when: python3_default_profile
+
+- name: Python 3 | Set current ansible user default python to point to python3
+  lineinfile:
+    line: "alias python={{ python3_executable_name }}"
+    regexp: "^alias python="
+    path: "{{ ansible_user_dir }}/.bashrc"
+    insertafter: EOF
+  when: python3_default_user

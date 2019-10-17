@@ -1,48 +1,65 @@
-Role Name
-=========
+# ericsysmin.python3
 
-A brief description of the role goes here.
+Ansible role that installs and sets system or user to use python3 via python
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should
-be mentioned here. For instance, if the role uses the EC2 module, it may be a
-good idea to mention in this section that the boto package is required.
+-   Ubuntu >= 16.04
+-   Debian >= 9
+-   RHEL >= 7
+-   CentOS >= 7
 
-Role Variables
---------------
+## Role Variables
 
-A description of the settable variables for this role should go here, including
-any variables that are in defaults/main.yml, vars/main.yml, and any variables
-that can/should be set via parameters to the role. Any variables that are read
-from other roles and/or the global scope (ie. hostvars, group vars, etc.) should
-be mentioned here as well.
+| Variable                  | Required | Default                      | Comments                                                        |
+| ------------------------- | -------- | ---------------------------- | --------------------------------------------------------------- |
+| `python3_package_name`    | Optional | `python3`                    | Name of the python package                                      |
+| `python3_executable_name` | Optional | `{{ python3_package_name }}` | Name of the python executable                                   |
+| `python3_default_system`  | Optional | `false`                      | Set /usr/bin/python to /usr/bin/{{ python3_executable_name }}   |
+| `python3_default_profile` | Optional | `false`                      | Set 'alias python={{ python3_executable_name}}' in /etc/profile |
+| `python3_default_user`    | Optional | `false`                      | Set 'alias python={{ python3_executable_name}}' in ~/.bashrc    |
 
-Dependencies
-------------
+## Example Playbook
 
-A list of other roles hosted on Galaxy should go here, plus any details in
-regards to parameters that may need to be set for other roles, or variables that
-are used from other roles.
+Simply install python3 no changes to `python` executable.
 
-Example Playbook
-----------------
+```yaml
+- hosts: servers
+  roles:
+    - role: ericsysmin.python3
+```
 
-Including an example of how to use your role (for instance, with variables
-passed in as parameters) is always nice for users too:
+Configure current user to use python3
 
-    - hosts: servers
-      roles:
-         - { role: ericsysmin.python3, x: 42 }
+```yaml
+- hosts: servers
+  roles:
+    - role: ericsysmin.python3
+      python3_default_user: true
+```
 
-License
--------
+Configure all users to use python3
 
-BSD
+```yaml
+- hosts: servers
+  roles:
+    - role: ericsysmin.python3
+      python3_default_profile: true
+```
 
-Author Information
-------------------
+Configure system to use python3 **USE WITH CAUTION**
 
-An optional section for the role authors to include contact information, or a
-website (HTML is not allowed).
+```yaml
+- hosts: servers
+  roles:
+    - role: ericsysmin.python3
+      python3_default_system: true
+```
+
+## License
+
+MIT
+
+## Author Information
+
+[ericsysmin](https://ericsysmin.com)

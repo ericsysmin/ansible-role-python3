@@ -1,8 +1,26 @@
 ---
 # defaults file for ericsysmin.python3
 
+python3_install_from: package
+
 python3_package_name: python3
 python3_executable_name: "{{ python3_package_name }}"
 python3_default_system: false
 python3_default_profile: false
-python3_default_user: true
+python3_default_user: false
+
+python3_version: 3.6.9
+python3_src_url: https://www.python.org/ftp/python/{{ python3_version }}/Python-{{ python3_version }}.tar.xz
+python3_install_dir: /tmp/python{{ python3_version }}
+
+python3_debian_build_packages:
+  - libreadline-gplv2-dev
+  - libncursesw5-dev
+  - libssl-dev
+  - libsqlite3-dev
+  - tk-dev
+  - libgdbm-dev
+  - libc6-dev
+  - libbz2-dev
+  - libffi-dev
+  - zlib1g-dev

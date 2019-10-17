@@ -1,0 +1,32 @@
+---
+- name: python3 | Source | Ensure build packages are installed
+  apt:
+    name: "{{ python3_debian_build_packages }}"
+    update_cache: yes
+  when: ansible_pkg_mgr == "apt"
+
+- name: python3 | Source | Ensure directory exists for unarchive
+  file:
+    path: "{{ python3_install_dir }}"
+    state: directory
+
+- name: python3 | Source | Download the python source code
+  unarchive:
+    src: "{{ python3_src_url }}"
+    dest: "{{ python3_install_dir }}"
+    remote_src: yes
+  register: python3_source_unpack
+
+- name: python3 | Source | Configure python binary from source  # noqa 503
+  command: "./configure --enable-optimizations"
+  args:
+    chdir: "{{ python3_install_dir }}"
+  when: python3_source_unpack|changed
+  register: python3_configure
+
+- name: python3 | Source | Install the python3 binary  # noqa 503
+  make:
+    chdir: "{{ python3_install_dir }}"
+    target: altinstall
+  become: yes
+  when: python3_configure|changed
