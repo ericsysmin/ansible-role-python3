@@ -12,7 +12,7 @@ python3_default_user: false
 python3_version: 3.6.9
 python3_src_url: https://www.python.org/ftp/python/{{ python3_version }}/Python-{{ python3_version }}.tar.xz
 python3_tar_dest: /tmp/python
-python3_install_dir: "{{ python3_tar_dest }}/{{ python3_version }}"
+python3_install_dir: "{{ python3_tar_dest }}/Python-{{ python3_version }}"
 
 python3_debian_build_packages:
   - libreadline-gplv2-dev
