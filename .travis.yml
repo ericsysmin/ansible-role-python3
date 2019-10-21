@@ -11,36 +11,36 @@ env:
   global:
     - ROLE_NAME: python3
   matrix:
-    # - MOLECULE_DISTRO: debian:stretch
-    # - MOLECULE_DISTRO: debian:stretch
-    #   MOLECULE_PLAYBOOK: playbook_profile.yml
-    # - MOLECULE_DISTRO: debian:stretch
-    #   MOLECULE_PLAYBOOK: playbook_system.yml
-    # - MOLECULE_DISTRO: debian:stretch
-    #   MOLECULE_PLAYBOOK: playbook_user.yml
+    - MOLECULE_DISTRO: debian:stretch
+    - MOLECULE_DISTRO: debian:stretch
+      MOLECULE_PLAYBOOK: playbook_profile.yml
+    - MOLECULE_DISTRO: debian:stretch
+      MOLECULE_PLAYBOOK: playbook_system.yml
+    - MOLECULE_DISTRO: debian:stretch
+      MOLECULE_PLAYBOOK: playbook_user.yml
     - MOLECULE_DISTRO: debian:stretch
       MOLECULE_PLAYBOOK: playbook_source.yml
-    # - MOLECULE_DISTRO: centos:7
-    # - MOLECULE_DISTRO: centos:7
-    #   MOLECULE_PLAYBOOK: playbook_profile.yml
-    # - MOLECULE_DISTRO: centos:7
-    #   MOLECULE_PLAYBOOK: playbook_system.yml
-    # - MOLECULE_DISTRO: centos:7
-    #   MOLECULE_PLAYBOOK: playbook_user.yml
-    # - MOLECULE_DISTRO: ubuntu:xenial
-    # - MOLECULE_DISTRO: ubuntu:xenial
-    #   MOLECULE_PLAYBOOK: playbook_profile.yml
-    # - MOLECULE_DISTRO: ubuntu:xenial
-    #   MOLECULE_PLAYBOOK: playbook_system.yml
-    # - MOLECULE_DISTRO: ubuntu:xenial
-    #   MOLECULE_PLAYBOOK: playbook_user.yml
-    # - MOLECULE_DISTRO: ubuntu:bionic
-    # - MOLECULE_DISTRO: ubuntu:bionic
-    #   MOLECULE_PLAYBOOK: playbook_profile.yml
-    # - MOLECULE_DISTRO: ubuntu:bionic
-    #   MOLECULE_PLAYBOOK: playbook_system.yml
-    # - MOLECULE_DISTRO: ubuntu:bionic
-    #   MOLECULE_PLAYBOOK: playbook_user.yml
+    - MOLECULE_DISTRO: centos:7
+    - MOLECULE_DISTRO: centos:7
+      MOLECULE_PLAYBOOK: playbook_profile.yml
+    - MOLECULE_DISTRO: centos:7
+      MOLECULE_PLAYBOOK: playbook_system.yml
+    - MOLECULE_DISTRO: centos:7
+      MOLECULE_PLAYBOOK: playbook_user.yml
+    - MOLECULE_DISTRO: ubuntu:xenial
+    - MOLECULE_DISTRO: ubuntu:xenial
+      MOLECULE_PLAYBOOK: playbook_profile.yml
+    - MOLECULE_DISTRO: ubuntu:xenial
+      MOLECULE_PLAYBOOK: playbook_system.yml
+    - MOLECULE_DISTRO: ubuntu:xenial
+      MOLECULE_PLAYBOOK: playbook_user.yml
+    - MOLECULE_DISTRO: ubuntu:bionic
+    - MOLECULE_DISTRO: ubuntu:bionic
+      MOLECULE_PLAYBOOK: playbook_profile.yml
+    - MOLECULE_DISTRO: ubuntu:bionic
+      MOLECULE_PLAYBOOK: playbook_system.yml
+    - MOLECULE_DISTRO: ubuntu:bionic
+      MOLECULE_PLAYBOOK: playbook_user.yml
 
 install:
   - pip install testinfra molecule docker
