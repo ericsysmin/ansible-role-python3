@@ -18,14 +18,14 @@
     creates: "{{ python3_install_dir }}"
   register: python3_source_unpack
 
-- name: python3 | Source | Configure python binary from source  # noqa 503
+- name: python3 | Source | Configure python binary from source
   command: "./configure --enable-optimizations"
   args:
     chdir: "{{ python3_install_dir }}"
   when: python3_source_unpack is changed
   register: python3_configure
 
-- name: python3 | Source | Install the python3 binary  # noqa 503
+- name: python3 | Source | Install the python3 binary
   make:
     chdir: "{{ python3_install_dir }}"
     target: altinstall
