@@ -1,0 +1,2 @@
+---
+python3_executable: /usr/bin/{{ python3_executable_name }}

@@ -1,0 +1,6 @@
+---
+python3_minor_version: "{{ python3_version.split('.')[:2]|join('.') }}"
+python3_executable_name: "python{{ python3_minor_version }}"
+python3_executable: "/usr/local/bin/{{ python3_executable_name }}"
+python3_pip_executable_name: "pip{{ python3_minor_version }}"
+python3_pip_executable: "/usr/local/bin/{{ python3_pip_executable_name }}"
