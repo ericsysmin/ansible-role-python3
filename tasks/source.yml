@@ -15,6 +15,7 @@
     src: "{{ python3_src_url }}"
     dest: "{{ python3_tar_dest }}"
     remote_src: yes
+    creates: "{{ python3_install_dir }}"
   register: python3_source_unpack
 
 - name: python3 | Source | Configure python binary from source  # noqa 503
