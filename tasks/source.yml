@@ -22,7 +22,7 @@
   command: "./configure --enable-optimizations"
   args:
     chdir: "{{ python3_install_dir }}"
-  when: python3_source_unpack|changed
+  when: python3_source_unpack is changed
   register: python3_configure
 
 - name: python3 | Source | Install the python3 binary  # noqa 503
@@ -30,4 +30,4 @@
     chdir: "{{ python3_install_dir }}"
     target: altinstall
   become: yes
-  when: python3_configure|changed
+  when: python3_configure is changed
