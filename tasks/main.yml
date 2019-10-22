@@ -1,5 +1,35 @@
 ---
 # tasks file for ericsysmin.python3
 
-- name: Python3 | | Install Python3
+- name: Python3 | Include python install vars
+  include_vars: "{{ python3_install_from }}_vars.yml"
+
+- name: Python3 | Install Python3
   include_tasks: "{{ python3_install_from }}.yml"
+
+- name: Python 3 | Set system default python to point to python3
+  become: yes
+  file:
+    src: "{{ python3_executable }}"
+    dest: "{{ python3_bin_path }}/python"
+    owner: root
+    group: root
+    state: link
+  when: python3_default_system
+
+- name: Python 3 | Set default user profile python to point to python3
+  become: yes
+  copy:
+    content: "alias python={{ python3_executable_name }}"
+    dest: /etc/profile.d/python3.sh
+    owner: root
+    group: root
+  when: python3_default_profile
+
+- name: Python 3 | Set current ansible user default python to point to python3
+  lineinfile:
+    line: "alias python={{ python3_executable_name }}"
+    regexp: "^alias python="
+    path: "{{ ansible_user_dir }}/.bashrc"
+    insertafter: EOF
+  when: python3_default_user

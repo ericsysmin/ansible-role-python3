@@ -1,32 +1,51 @@
 ---
-- name: python3 | Source | Ensure build packages are installed
+- name: python3 | Source | Apt | Ensure build packages are installed
   apt:
     name: "{{ python3_debian_build_packages }}"
     update_cache: yes
   when: ansible_pkg_mgr == "apt"
 
+- name: python3 | Source | YUM | Ensure build packages are installed
+  yum:
+    name: "{{ python3_yum_build_packages }}"
+    update_cache: yes
+  when: ansible_pkg_mgr == "yum"
+
 - name: python3 | Source | Ensure directory exists for unarchive
   file:
-    path: "{{ python3_install_dir }}"
+    path: "{{ python3_tar_dest }}"
     state: directory
 
 - name: python3 | Source | Download the python source code
   unarchive:
     src: "{{ python3_src_url }}"
-    dest: "{{ python3_install_dir }}"
+    dest: "{{ python3_tar_dest }}"
     remote_src: yes
+    creates: "{{ python3_install_dir }}"
   register: python3_source_unpack
 
-- name: python3 | Source | Configure python binary from source  # noqa 503
+- name: python3 | Source | Configure python binary from source
   command: "./configure --enable-optimizations"
   args:
     chdir: "{{ python3_install_dir }}"
-  when: python3_source_unpack|changed
+  when: python3_source_unpack is changed
   register: python3_configure
 
-- name: python3 | Source | Install the python3 binary  # noqa 503
+- name: python3 | Source | Install the python3 binary
   make:
     chdir: "{{ python3_install_dir }}"
     target: altinstall
   become: yes
-  when: python3_configure|changed
+  when: python3_configure is changed
+
+- name: Python 3 | Set python3 executables to point to new python3 version
+  become: yes
+  file:
+    src: "{{ item.src }}"
+    path: "{{ item.path }}"
+    state: link
+  loop:
+    - src: "{{ python3_executable }}"
+      path: "{{ python3_bin_path }}/python3"
+    - src: "{{ python3_pip_executable }}"
+      path: "{{ python3_bin_path }}/pip3"

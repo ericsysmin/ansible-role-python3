@@ -1,0 +1,8 @@
+---
+# source install vars file for ericsysmin.python3
+
+python3_bin_path: /usr/local/bin
+python3_minor_version: "{{ python3_version.split('.')[:2]|join('.') }}"
+python3_executable_name: "python{{ python3_minor_version }}"
+python3_pip_executable_name: "pip{{ python3_minor_version }}"
+python3_pip_executable: "{{ python3_bin_path }}/{{ python3_pip_executable_name }}"

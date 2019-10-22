@@ -1,2 +1,4 @@
 ---
 # vars file for ericsysmin.python3
+
+python3_executable: "{{ python3_bin_path }}/{{ python3_executable_name }}"

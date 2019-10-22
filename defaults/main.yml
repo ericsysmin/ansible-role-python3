@@ -11,7 +11,8 @@ python3_default_user: false
 
 python3_version: 3.6.9
 python3_src_url: https://www.python.org/ftp/python/{{ python3_version }}/Python-{{ python3_version }}.tar.xz
-python3_install_dir: /tmp/python{{ python3_version }}
+python3_tar_dest: /tmp/python
+python3_install_dir: "{{ python3_tar_dest }}/Python-{{ python3_version }}"
 
 python3_debian_build_packages:
   - libreadline-gplv2-dev
@@ -24,3 +25,11 @@ python3_debian_build_packages:
   - libbz2-dev
   - libffi-dev
   - zlib1g-dev
+
+python3_yum_build_packages:
+  - make
+  - gcc
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - zlib-devel

@@ -4,4 +4,5 @@
   roles:
     - role: ericsysmin.python3
       python3_install_from: source
+      python3_default_profile: true
       python3_version: 3.6.9
