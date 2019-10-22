@@ -5,6 +5,12 @@
     update_cache: yes
   when: ansible_pkg_mgr == "apt"
 
+- name: python3 | Source | YUM | Ensure build packages are installed
+  yum:
+    name: "{{ python3_yum_build_packages }}"
+    update_cache: yes
+  when: ansible_pkg_mgr == "yum"
+
 - name: python3 | Source | Ensure directory exists for unarchive
   file:
     path: "{{ python3_tar_dest }}"

@@ -25,3 +25,11 @@ python3_debian_build_packages:
   - libbz2-dev
   - libffi-dev
   - zlib1g-dev
+
+python3_yum_build_packages:
+  - make
+  - gcc
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - zlib-devel
