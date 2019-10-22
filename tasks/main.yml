@@ -10,6 +10,7 @@
 - name: Python 3 | Set system default python to point to python3
   become: yes
   file:
+    force: yes
     src: "{{ python3_executable }}"
     dest: "{{ python3_bin_path }}/python"
     owner: root

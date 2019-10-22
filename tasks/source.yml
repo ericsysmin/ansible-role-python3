@@ -41,6 +41,7 @@
 - name: Python 3 | Set python3 executables to point to new python3 version
   become: yes
   file:
+    force: yes
     src: "{{ item.src }}"
     path: "{{ item.path }}"
     state: link
