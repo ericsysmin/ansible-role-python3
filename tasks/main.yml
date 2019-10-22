@@ -11,7 +11,7 @@
   become: yes
   file:
     src: "{{ python3_executable }}"
-    dest: /usr/bin/python
+    dest: "{{ python3_bin_path }}/python"
     owner: root
     group: root
     state: link
