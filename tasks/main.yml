@@ -8,7 +8,6 @@
   include_tasks: "{{ python3_install_from }}.yml"
 
 - name: Python 3 | Set system default python to point to python3
-  become: yes
   file:
     force: yes
     src: "{{ python3_executable }}"
@@ -16,15 +15,16 @@
     owner: root
     group: root
     state: link
+  become: yes
   when: python3_default_system
 
 - name: Python 3 | Set default user profile python to point to python3
-  become: yes
   copy:
     content: "alias python={{ python3_executable_name }}"
     dest: /etc/profile.d/python3.sh
     owner: root
     group: root
+  become: yes
   when: python3_default_profile
 
 - name: Python 3 | Set current ansible user default python to point to python3

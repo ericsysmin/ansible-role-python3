@@ -1,14 +1,18 @@
 ---
 - name: python3 | Source | Apt | Ensure build packages are installed
-  apt:
-    name: "{{ python3_debian_build_packages }}"
-    update_cache: yes
+  apt: name="{{ python3_debian_build_packages }}" update_cache=yes
+  register: task_result
+  until: task_result is success
+  retries: 10
+  delay: 2
   when: ansible_pkg_mgr == "apt"
 
 - name: python3 | Source | YUM | Ensure build packages are installed
-  yum:
-    name: "{{ python3_yum_build_packages }}"
-    update_cache: yes
+  yum: name="{{ python3_yum_build_packages }}" update_cache=yes
+  register: task_result
+  until: task_result is success
+  retries: 10
+  delay: 2
   when: ansible_pkg_mgr == "yum"
 
 - name: python3 | Source | Ensure directory exists for unarchive
@@ -39,12 +43,12 @@
   when: python3_configure is changed
 
 - name: Python 3 | Set python3 executables to point to new python3 version
-  become: yes
   file:
     force: yes
     src: "{{ item.src }}"
     path: "{{ item.path }}"
     state: link
+  become: yes
   loop:
     - src: "{{ python3_executable }}"
       path: "{{ python3_bin_path }}/python3"
