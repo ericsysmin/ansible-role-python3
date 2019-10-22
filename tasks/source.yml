@@ -36,12 +36,10 @@
   become: yes
   file:
     src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
+    path: "{{ item.path }}"
     state: link
   loop:
     - src: "{{ python3_executable }}"
-      dest: "{{ python3_bin_path }}/python3"
+      path: "{{ python3_bin_path }}/python3"
     - src: "{{ python3_pip_executable }}"
-      dest: "{{ python3_bin_path }}/pip3"
+      path: "{{ python3_bin_path }}/pip3"
