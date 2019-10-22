@@ -1,2 +1,4 @@
 ---
-python3_executable: /usr/bin/{{ python3_executable_name }}
+# package install vars file for ericsysmin.python3
+
+python3_bin_path: /usr/bin

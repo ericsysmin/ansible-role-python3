@@ -42,6 +42,6 @@
     state: link
   loop:
     - src: "{{ python3_executable }}"
-      dest: /usr/local/bin/python3
+      dest: "{{ python3_bin_path }}/python3"
     - src: "{{ python3_pip_executable }}"
-      dest: /usr/local/bin/pip3
+      dest: "{{ python3_bin_path }}/pip3"
