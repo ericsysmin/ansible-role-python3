@@ -6,5 +6,3 @@
   until: task_result is success
   retries: 10
   delay: 2
-  vars:
-    ansible_python_interpreter: /usr/bin/python2
