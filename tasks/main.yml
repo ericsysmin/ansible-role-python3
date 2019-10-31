@@ -12,8 +12,6 @@
     force: yes
     src: "{{ python3_executable }}"
     dest: "{{ python3_bin_path }}/python"
-    owner: root
-    group: root
     state: link
   become: yes
   when: python3_default_system
